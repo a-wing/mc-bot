@@ -1,0 +1,2 @@
+qqbot == 2.3.10
+git+https://github.com/barneygale/MCRcon.git
