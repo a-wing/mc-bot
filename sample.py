@@ -1,13 +1,10 @@
 import mcrcon
+from readInfo import readCfg
 
-address = "mc.cityjianyi.com"
-port = 35575
-password = "admin"
-print("#connecting the server: %s:%d" % (address, port))
+ip,port,password=readCfg()
 mc = mcrcon.MCRcon()
-mc.connect(address, port, password)
-print("#connection has been established,ready to work")
-
+mc.connect(ip, int(port), password)
+print("connection established")
 
 def onQQMessage(bot, contact, member, content):
     if content == '':
@@ -27,7 +24,7 @@ def onQQMessage(bot, contact, member, content):
     commander = member.name
     if content in commands:
         if (core in opcommands) and (commander in op):
-			print("you are permitted")
+            print("you are permitted")
             bot.SendTo(contact,"you are permitted")
             response = mc.command(content[1:])
             bot.SendTo(contact, response)
