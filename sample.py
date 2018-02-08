@@ -20,19 +20,20 @@ def onQQMessage(bot, contact, member, content):
                              '->输入/plugins查看服务器支持插件\n'
                              '->输入/version查看服务器版本\n'
                              '->其它的，欢迎探索哦'))
-    commands = ["/list", "/plugins", "/version", "/restart", "/stop", "time"]
-    opcommands = ["/restart", "/stop", "/time"]
+    commands = ["/list", "/plugins", "/version", "/restart", "/stop", "/time","/whitelist"]
+    opcommands = ["/restart", "/stop", "/time","/whitelist"]
     op = ["traceback", "metal", "抽奖和白名单请私聊我"]
     core = content.split()[0]
     commander = member.name
     if content in commands:
         if (core in opcommands) and (commander in op):
-            bot.SendTo("you are permitted")
+			print("you are permitted")
+            bot.SendTo(contact,"you are permitted")
             response = mc.command(content[1:])
             bot.SendTo(contact, response)
             return
-        elif not (commander in op):
-            bot.SendTo(contact, 'permission denied')
+        elif (not(commander in op))and(core in opcommands):
+            bot.SendTo(contact, "permission denied")
             return
         else:
             response = mc.command(content[1:])
